@@ -7,13 +7,26 @@ let popupSound = new Audio("./audio/pop-3.mp3")
 let winSound = new Audio("./audio/win.wav")
 let drawSound = new Audio("./audio/draw.wav")
 let restartSound = new Audio("./audio/restart.wav")
-
+let explosionSound = new Audio("./audio/explosion.wav")
 let winStates = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
 
 function resetGame(){
     restartSound.play()
+    explosionSound.play()
     boxes.forEach(box=>{
+        if(box.classList.contains("x")){
+            let particlList = makekParticles("x",60,box,"0px")
+            particlList.forEach(particle=>{
+                particle.update()
+            })
+        }
+        else if(box.classList.contains("o")){
+            let particlList = makekParticles("o",60,box,"50%")
+            particlList.forEach(particle=>{
+                particle.update()
+            })
+        }
         box.addEventListener("click",isPlaying)
         if(box.classList.contains("x")) box.classList.remove("x")
         else if(box.classList.contains("o")) box.classList.remove("o")
