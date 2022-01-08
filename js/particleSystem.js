@@ -5,8 +5,6 @@ function randInt(min,max){
     return Math.floor(Math.random()*(max-min))+min
 }
 
-let canStop = false;
-// CLASS
 
 class Particle{
     constructor(type,NodeToAppend,borderRadius){
@@ -26,8 +24,8 @@ class Particle{
         this.posY = NodeToAppend.clientHeight / 2
         this.particle.style.left = this.posX + 'px'
         this.particle.style.top = this.posY+ 'px'
-        this.accelerationX = -this.speedX/20
-        this.accelerationY = -this.speedY/20
+        this.accelerationX = -this.speedX/10
+        this.accelerationY = -this.speedY/10
         this.opacity = 1
         this.opacityDecrease = 0.1
         this.timer = 0
@@ -86,25 +84,6 @@ function makekParticles(type,number0fParticles,NodeToAppend,borderRadius){
         particleList.push(new Particle(type,NodeToAppend,borderRadius))
     }
     return particleList
-}
-
-// let particles = makekParticles("o",60,document.body)
-
-
-
-function Update(particles){
-    
-    particles.forEach(particle => {
-        if(particle.canStop) {
-            console.log(particle.canStop)
-            return
-        }
-        particle.move()
-    });
-    console.log("before can stop")
-    requestAnimationFrame(()=>{
-        Update(particles)
-    })
 }
 
 
